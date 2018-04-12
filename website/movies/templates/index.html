@@ -3,6 +3,9 @@
     {% for movie in movie_list %}
         <li>{{ movie.movie_title }}</li>
         <li>{{ movie.vote_average }}</li>
+        <li><a href='{{ movie.url }}'>
+          <img src='{{ movie.img_url }}' width=100 height=100></img>
+        </a></li>
     {% endfor %}
     </ul>
 {% else %}

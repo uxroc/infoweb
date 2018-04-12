@@ -4,7 +4,7 @@ import json
 import pandas as pd
 #___________________________
 def load_tmdb_movies(path):
-    df = pd.read_csv(path)
+    df = pd.read_csv(path, encoding='cp1252')
     df['release_date'] = pd.to_datetime(df['release_date']).apply(lambda x: x.date())
     json_columns = ['genres', 'keywords', 'production_countries',
                     'production_companies', 'spoken_languages']
