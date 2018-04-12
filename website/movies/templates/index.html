@@ -1,0 +1,10 @@
+{% if movie_list %}
+    <ul>
+    {% for movie in movie_list %}
+        <li>{{ movie.movie_title }}</li>
+        <li>{{ movie.vote_average }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No movies are available.</p>
+{% endif %}
