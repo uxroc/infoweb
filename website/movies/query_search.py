@@ -37,9 +37,9 @@ class SearchQuery(object):
         self._bt = {}
         self._movies= []
         # load the dataset
-        credits = Preprocessing.load_tmdb_credits("D:/WPI/CS525-IR/Project/tmdb_5000_credits.csv")
-        movies = Preprocessing.load_tmdb_movies("D:/WPI/CS525-IR/Project/tmdb_5000_movies.csv")
-        self.tmdb = Preprocessing.convert_to_original_format(movies, credits)
+        movies = load_tmdb_movies('tmdb_5000_movies.csv')
+        credits = load_tmdb_credits('tmdb_5000_credits.csv')
+        self.tmdb = convert_to_original_format(movies, credits)
 
     def index_df(self):
         if os.path.exists('score.npy'):
