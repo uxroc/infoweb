@@ -3,7 +3,7 @@ import nltk
 from nltk.corpus import stopwords
 import os.path
 import numpy as np
-from import_data import *
+from .import_data import *
 
 def keyword_tokenize(text):
     tokens = text.split('|')
@@ -36,8 +36,8 @@ class SearchQuery(object):
         self._bt = {}
         self._movies= []
         # load the dataset
-        movies = load_tmdb_movies('../tmdb_5000_movies.csv')
-        credits = load_tmdb_credits('../tmdb_5000_credits.csv')
+        movies = load_tmdb_movies('tmdb_5000_movies.csv')
+        credits = load_tmdb_credits('tmdb_5000_credits.csv')
         self.tmdb = convert_to_original_format(movies, credits)
 
     def index_df(self):
@@ -101,7 +101,8 @@ def main(args):
     print("starting searching")
     num_files = search.index_df()
     print('search results are:')
-    print(search.search_result(query))
+    ret = search.search_result(query)
+    print(ret)
 
 if __name__ == "__main__":
     import sys
