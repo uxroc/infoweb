@@ -68,14 +68,11 @@ class Recommender:
         return self.ratings
 
     def get_recommendation(self, id):
+
+        id -= 1
+
         similarity = self.get_similarity(id)
         ratings = self.get_rating()
-
-        '''
-        ratings = ratings / np.max(ratings)
-        vec = similarity + 0.3 * ratings
-        return vec.argsort()[-5:][::-1]
-        '''
 
         #TODO: need a better way to combine similarity and popularity
         id_list = similarity.argsort()
@@ -83,7 +80,10 @@ class Recommender:
         other_id_list = id_list[:-20].astype(int)
 
         ratings[other_id_list] = 0
-        return ratings.argsort()[-10:][::-1]
+        ret = ratings.argsort()[-20:][::-1]
+        ret += 1
+
+        return ret
 
 
     def get_info(self, id):
