@@ -1,13 +1,221 @@
-{% if movie_list %}
-    <ul>
-    {% for movie in movie_list %}
-        <li>{{ movie.movie_title }}</li>
-        <li>{{ movie.vote_average }}</li>
-        <li><a href='{{ movie.url }}'>
-          <img src='{{ movie.img_url }}' width=100 height=100></img>
-        </a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No movies are available.</p>
+{% load static %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Movies</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FREEHTML5.CO" />
+
+  <!--
+	//////////////////////////////////////////////////////
+
+	FREE HTML5 TEMPLATE
+	DESIGNED & DEVELOPED by FREEHTML5.CO
+
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	 -->
+
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+	<!-- Google Webfonts -->
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Animate.css -->
+	<link rel="stylesheet" href='{% static 'css/animate.css' %}'>
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href='{% static 'css/icomoon.css' %}'>
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+	<!-- Salvattore -->
+	<link rel="stylesheet" href="{% static 'css/salvattore.css' %}">
+	<!-- Theme Style -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<!-- Modernizr JS -->
+	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+
+	<div id="fh5co-offcanvass">
+		<p class="fh5co-social-icons">
+			<a href="#"><i class="icon-twitter"></i></a>
+			<a href="#"><i class="icon-facebook"></i></a>
+			<a href="#"><i class="icon-instagram"></i></a>
+			<a href="#"><i class="icon-dribbble"></i></a>
+			<a href="#"><i class="icon-youtube"></i></a>
+		</p>
+	</div>
+	<header id="fh5co-header" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<a class="navbar-brand" href="/" align='center'><span style='font-size:40px'>Movies</span></a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- END .header -->
+
+	<div id="fh5co-main">
+
+		<div class="container">
+
+			<form action="/" method='get'>
+						<div class="row" align="center">
+							<div class="col-md-3">
+							</div>
+							<div class="col-md-6">
+									<input name='search' type="search" class="form-control" placeholder="Search Movies...">
+							</div>
+							<div class="col-md-2">
+									<input type="submit" class="btn btn-primary" value="Search">
+							</div>
+						</div>
+			</form>
+
+			<h2 id='page_purpose'></h2>
+
+			<div class="row">
+
+				{% if movie_list %}
+			  <div id="fh5co-board" data-columns>
+					{% for movie in movie_list %}
+        	<div class="item">
+        		<div class="animate-box">
+	        		<a href="{{ movie.url }}" title="{{ movie.movie_title }}"><img src="{{ movie.img_url }}" alt="{{ movie.movie_title }}"></a>
+        		</div>
+						<div class='fh5co-desc'><h4 align='center'>{{ movie.movie_title }}<h4></div>
+						<div class="fh5co-desc">
+							<b>Actors:</b> {{ movie.actor_1 }}, <br>
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							{{ movie.actor_2 }}<br>
+							<b>Director:</b> {{ movie.director_name }}<br>
+							<b>Rating: {{ movie.vote_average }}</b><br>
+						</div>
+						<i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+						<div class="fh5co-desc"><a href="?recommendation={{ movie.id }}&movie_title={{ movie.movie_title }}"><h5 style='color:blue'>>>>More Movies Like This</h5></a></div>
+					</div>
+					{% endfor %}
+
+        </div>
+				{% else %}
+					<br><br><br><br><br><br>
+					<p> <h1 align='center' style='color:red'> Woops! Nothing found! :(</h1> </p>
+				{% endif %}
+
+        </div>
+       </div>
+	</div>
+
+{% if is_paginated %}
+<div align='center'>
+		<ul class="pagination">
+				{% if page_obj.has_previous %}
+						<li><a href="{{ request.path }}?page={{ page_obj.previous_page_number }}
+								{% for key,value in request.GET.items %}
+										{% ifnotequal key 'page' %}
+												&{{ key }}={{ value }}
+										{% endifnotequal %}
+								{% endfor %}
+								">previous</a></li>
+				{% else %}
+								<li class="disabled"><a href="#">previous</a></li>
+				{% endif %}
+
+				{% for page in page_obj.paginator.page_range|slice:':10' %}
+				     {% ifequal page page_obj.number %}
+				          <li class="active"><a href="#">{{ page }}</a></li>
+				     {% else %}
+				          <li><a href="{{ request.path }}?page={{ page }}
+				              {% for key,value in request.GET.items %}
+				                  {% ifnotequal key 'page' %}
+				                       &{{ key }}={{ value }}
+				                  {% endifnotequal %}
+				              {% endfor %}
+				              ">{{ page }}</a></li>
+				     {% endifequal %}
+				{% endfor %}
+
+				{% if page_obj.has_next %}
+						<li><a href="{{ request.path }}?page={{ page_obj.next_page_number }}
+								{% for key,value in request.GET.items %}
+										{% ifnotequal key 'page' %}
+												&{{ key }}={{ value }}
+										{% endifnotequal %}
+								{% endfor %}
+								">next</a></li>
+				{% else %}
+						<li class="disabled"><a href="#">next</a></li>
+				{% endif %}
+<!--  </span> -->
+</div>
 {% endif %}
+
+
+	<!-- jQuery -->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<!-- jQuery Easing -->
+	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+	<!-- Magnific Popup -->
+	<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+	<!-- Salvattore -->
+	<script src="{% static 'js/salvattore.min.js' %}"></script>
+	<!-- Main JS -->
+	<script src="{% static 'js/main.js' %}"></script>
+
+
+
+
+	</body>
+</html>
+
+<script>
+
+	function myFunction(x) {
+		x.classList.toggle("fa-thumbs-down");
+	}
+
+	$(document).ready(function(){
+		{% if request.GET.recommendation %}
+			$('#page_purpose').html('Similar Movies for: {{ request.GET.movie_title }}');
+		{% elif request.GET.search %}
+			$('#page_purpose').html('Search Results for: {{ request.GET.search }}');
+		{% endif %}
+	});
+
+</script>
