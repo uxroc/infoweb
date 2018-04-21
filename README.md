@@ -14,3 +14,5 @@
 
 ### Enjoy!
 
+#### Github Pages
+Settings -> GitHub Pages
