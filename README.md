@@ -5,6 +5,10 @@
     pip install nltk
     pip install django
 
+- python version 3.6.3
+
+- django version 2.0.0
+
 #### Instruction
 - `git clone https://github.com/uxroc/infoweb`
 
